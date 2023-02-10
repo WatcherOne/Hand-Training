@@ -1,0 +1,12 @@
+/**
+ *   定义重复使用的混合样式
+ *  
+ **/
+
+ @mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
