@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.example.mapper.UserMapper">
+
+    <sql id="userParams">
+        select
+            IF(u.sex = 0, "女", "男") as sexName,
+            u.*
+        from user u
+    </sql>
+
+    <select id="getUserList" resultType="org.example.entity.User">
+        <include refid="userParams"></include>
+    </select>
+
+    <select id="getUserById" resultType="org.example.entity.User">
+        <include refid="userParams"></include>
+        where u.id = #{id}
+    </select>
+
+    <insert id="add">
+        insert into user values(null, #{userCode}, #{userName}, #{age}, #{sex}, #{idCard}, #{password})
+    </insert>
+
+    <update id="update">
+        update
+            user
+        set
+            user_code = #{userCode},
+            user_name = #{userName},
+            age = #{age},
+            sex = #{sex},
+            id_card = #{idCard},
+            password = #{password}
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from user where id in
+        <foreach collection="ids" item="userId" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+</mapper>

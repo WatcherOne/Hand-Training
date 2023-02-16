@@ -1,0 +1,18 @@
+server:
+  port: 9000
+
+spring:
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/hand-training?serverTimezone=Hongkong
+    username: root
+    password: 12345678
+
+# mybatis配置
+mybatis:
+  # mybatis-config.xml文件的位置
+  config-location: classpath:/mybatis-config.xml
+  # 让 Dao 找到 xml文件地址
+  mapper-locations: classpath*:/mappers/*.xml
+  # 配置数据库实体包路径
+  type-aliases-package: com.watcher.entity
